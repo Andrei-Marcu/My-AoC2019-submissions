@@ -13,7 +13,7 @@ int main() {
 	{
 		x = x / 3 - 2;
 		s1 += x;
-		while ((x = x / 3 - 2)>0)
+		while ((x = x / 3 - 2) > 0)
 		{
 			s2 += x;
 		}

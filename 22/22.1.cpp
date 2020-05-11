@@ -42,13 +42,13 @@ ofstream fout("output.txt");
 
 struct shuffle {
 	number nr;
-	shuffle(int nr): nr(nr){}
+	shuffle(int nr) : nr(nr) {}
 	virtual void perform() = 0;
 	virtual void reverse() = 0;
 };
 
 struct cut : shuffle {
-	cut(int nr): shuffle(nr < 0 ? N + nr : nr) {}
+	cut(int nr) : shuffle(nr < 0 ? N + nr : nr) {}
 	void perform() {
 		pos -= nr;
 		if (pos < 0)
@@ -105,9 +105,9 @@ struct incr : shuffle {
 //vector<number> shifts;
 
 int main() {
-	shuffle *shuffles[COMMS + 1];
+	shuffle* shuffles[COMMS + 1];
 	int i = 0;
-	for (;fin.getline(s, LIMIT);i++)
+	for (; fin.getline(s, LIMIT); i++)
 	{
 		if (strstr(s, CUT))
 		{
@@ -134,7 +134,7 @@ int main() {
 		nrs.push_back(pos);
 	}
 	cout << pos;
-	
+
 	/*for (auto j = shuffles; j != shuffles + i; j++) {
 		(*j)->reverse();
 	}

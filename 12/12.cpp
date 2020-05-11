@@ -126,7 +126,7 @@ big day2() {
 
 int main() {
 
-	int intersect[3*N];
+	int intersect[3 * N];
 
 	for (size_t i = 0; i < N; i++)
 	{

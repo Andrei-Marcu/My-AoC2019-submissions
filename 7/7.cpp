@@ -149,9 +149,9 @@ private:
 		}
 		return 1;
 	}
-}amps[NRAMP];
+} amps[NRAMP];
 
-void go(bool part2) {
+int go(bool part2) {
 	isPart2 = part2;
 	int maxoutput = INT_MIN;
 	for (size_t k = 0; k < 120; k++)
@@ -167,7 +167,7 @@ void go(bool part2) {
 			maxoutput = input;
 		}
 	}
-	cout << maxoutput;
+	return maxoutput;
 }
 
 int main() {
@@ -177,7 +177,5 @@ int main() {
 		prog.push_back(x);
 		fin.get(dump);
 	}
-	go(0);
-	cout << ' ';
-	go(1);
+	cout << go(false) << ' ' << go(true);
 }

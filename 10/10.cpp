@@ -117,7 +117,7 @@ int main() {
 	}
 	cout /*<< best1.x << ' ' << best1.y << '\n'*/ << mx - 1;
 
-	map<Angle,vector<Coord*>> astMap;
+	map<Angle, vector<Coord*>> astMap;
 	for (auto& asteroid : asteroids)
 	{
 		asteroid /= best1;

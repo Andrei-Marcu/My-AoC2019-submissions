@@ -109,7 +109,7 @@ bool cycle() {
 			}*/
 			break;
 		}
-		state= (state + 1)%3;
+		state = (state + 1) % 3;
 		i += 2;
 		break;
 	}

@@ -14,7 +14,7 @@ map<string, set<string>> sons;
 map<string, string> father;
 map<string, int> level;
 
-int calculate_orbits(string center,int indirect_orbits) {
+int calculate_orbits(string center, int indirect_orbits) {
 	int sum = indirect_orbits;
 	level[center] = indirect_orbits;
 	for (auto& orbit : sons[center])
@@ -37,7 +37,7 @@ int main() {
 	//to make matters much easier I'm just gonna pretend that Santa can also travel and they can only travel up untill they meet
 	int transfers = 0;
 	string you = "YOU", santa = "SAN";
-	
+
 	while (level[you] < level[santa])
 	{
 		santa = father[santa];

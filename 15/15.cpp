@@ -162,7 +162,7 @@ int step(int dir) {
 //meanwhile I was looking to implement A*, foolish me
 void search(int dir, int depth) {
 	int res = step(dir);
-	if (res) { 
+	if (res) {
 		for (int i = 1; i <= 4; i++)
 		{
 			if (peek(pos + i) == -1) {
@@ -182,7 +182,7 @@ int spread(coord pos, int depth) {
 		int maxdepth = depth;
 		for (size_t i = 1; i <= 4; i++)
 		{
-			maxdepth = max(spread(pos + i, depth + 1),maxdepth);
+			maxdepth = max(spread(pos + i, depth + 1), maxdepth);
 		}
 		return maxdepth;
 	}
@@ -209,7 +209,7 @@ int main() {
 			}
 			else
 			{
-				switch (peek({i, j}))
+				switch (peek({ i, j }))
 				{
 				case 1:
 					cout << ' ';

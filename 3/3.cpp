@@ -17,7 +17,7 @@ unsigned short a[limit][limit];
 
 struct point {
 	int v, h;
-	point(int v, int h): v(v), h(h) {}
+	point(int v, int h) : v(v), h(h) {}
 	auto operator+=(point& rhs) {
 		v += rhs.v;
 		h += rhs.h;
@@ -31,7 +31,7 @@ struct point {
 	}
 };
 
-auto center = point(middle,middle), loc = center;
+auto center = point(middle, middle), loc = center;
 
 point* p[256];
 unsigned short travel;
@@ -56,6 +56,7 @@ int main() {
 			a[loc.v][loc.h] = ++travel;
 		}
 	}
+
 	loc = center;
 	travel = 0;
 	while (fin2 >> s)

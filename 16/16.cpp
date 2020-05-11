@@ -59,7 +59,7 @@ void part2() {
 	for (size_t phase = 0; phase < 100; phase++)
 	{
 		//quite upset of the way I had to solve this day. I had to rely on the fact that the first digits point at least at half the input.
-		if(offset >= n / 2)
+		if (offset >= n / 2)
 		{
 			int sum = 0;
 			for (size_t i = n - 1; i >= offset; i--)

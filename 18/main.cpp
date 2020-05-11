@@ -65,16 +65,16 @@ struct Graph
 
 	void update(Node a, Node b, size_t dist) {
 		//if (isKey(b)) {
-			if (isEgde(a, b)) {
-				auto& iniDist = adjacency[a][b];
-				if (dist < iniDist) {
-					iniDist = dist;
-				}
+		if (isEgde(a, b)) {
+			auto& iniDist = adjacency[a][b];
+			if (dist < iniDist) {
+				iniDist = dist;
 			}
-			else
-			{
-				insert(a, b, dist);
-			}
+		}
+		else
+		{
+			insert(a, b, dist);
+		}
 		//}
 		/*if (isKey(a)) {
 			if (isEgde(b, a)) {
@@ -106,7 +106,7 @@ struct Graph
 			{
 				for (auto& b : adjacents)
 				{
-					if(a.first != b.first /*&& isKey(b.first)*/)
+					if (a.first != b.first /*&& isKey(b.first)*/)
 						update(a.first, b.first, a.second + b.second);
 				}
 			}
@@ -146,7 +146,7 @@ struct Graph
 
 vector<string> area;
 
-const coord nullCoord = coord(0,0);
+const coord nullCoord = coord(0, 0);
 
 coord operator+(coord& lhs, coord& rhs) {
 	return { lhs.first + rhs.first,lhs.second + rhs.second };
@@ -169,7 +169,7 @@ bitset<NRKEYS> allKeys;
 set<Node> doorStack;
 
 //Advent of Code is Minecaft
-void registerDoor(Node door, coord pos){
+void registerDoor(Node door, coord pos) {
 	//Already registered doors will be ignored
 	if (positions[door] != pos) {
 		positions[door] = pos;
@@ -192,8 +192,8 @@ void bfs(coord& start) {
 
 	map<coord, bool> explored;
 
-		  //location distance
-	queue<pair<coord,int>> toExpl;
+	//location distance
+	queue<pair<coord, int>> toExpl;
 
 	explored[start] = 1;
 	spread(explored, toExpl, start, 1);
@@ -258,11 +258,11 @@ int main() {
 
 	for (Node i = 'a'; i <= 'z'; i++)
 	{
-		if(positions[i] != nullCoord)
+		if (positions[i] != nullCoord)
 			bfs(positions[i]);
 	}
 
-	priority_queue<Graph*, vector<Graph*>,Graph> graphs;
+	priority_queue<Graph*, vector<Graph*>, Graph> graphs;
 	graphs.push(&iniGraph);
 
 	while (!graphs.empty())

@@ -219,7 +219,7 @@ int main() {
 	{
 		for (size_t j = 1; j < jLim; j++)
 		{
-			if (isIntersection(i,j)) {
+			if (isIntersection(i, j)) {
 				sum += i * j;
 			}
 		}
@@ -251,9 +251,9 @@ int main() {
 	fin.close();
 	part1 = 0;
 	cout << "\n\nSince this year I've been focused on solving ASAP, this is not automatic."
-		 << "\nYou need to find the patterns by yourself(which is faster than me coding an automation)"
-		 << "\nand load them into an input2.txt file which is going to be parsed character by character,"
-		 << "\nincluding new lines. See input2.ex which is made after the example\nPress RETURN when ready...";
+		<< "\nYou need to find the patterns by yourself(which is faster than me coding an automation)"
+		<< "\nand load them into an input2.txt file which is going to be parsed character by character,"
+		<< "\nincluding new lines. See input2.ex which is made after the example\nPress RETURN when ready...";
 	cin.get();
 	fin = ifstream("input2.txt");
 	i = 0;

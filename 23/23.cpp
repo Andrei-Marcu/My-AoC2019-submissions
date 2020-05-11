@@ -30,7 +30,7 @@ packet NAT;
 
 struct Computer
 {
-	number *s, pc = 0, base = 0, readState = -1, writeState = 0, sendTo, id;
+	number* s, pc = 0, base = 0, readState = -1, writeState = 0, sendTo, id;
 
 	bool isWorking = 1;
 

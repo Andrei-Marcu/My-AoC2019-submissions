@@ -73,7 +73,6 @@ int main() {
 		}
 	}
 
-	//Your terminal ain't monospace? Too bad!
 	for (size_t i = 0; i < H; i++)
 	{
 		for (size_t j = 0; j < W; j++)

@@ -6,6 +6,7 @@
 #include <bitset>
 
 #define BUG '#'
+#define MTY '.'
 
 using namespace std;
 
@@ -14,10 +15,10 @@ ifstream fin("input.txt");
 typedef pair<int, int> coord;
 
 const coord directions[] = {
-	{-1,0},	//0 up
-	{0,1},	//1 down
-	{1,0},	//2	left
-	{0,-1}	//3	right
+	{-1,0},		//0 up
+	{1, 0},		//1 down
+	{0, -1},	//2	left
+	{0, 1}		//3	right
 };
 
 inline bool checkBounds(int x) {
@@ -33,14 +34,13 @@ coord operator+(const coord& lhs, const coord& rhs) {
 }
 
 
-//At first glance you would think that this spaghetti code hell took hours to debug, but it didnt! 
-//Not because it would have been easy to debug, but because it worked on the first try. This and part one too, ROFL.
+//This code used to be broken but still worked for my input somehow, lol
 struct level
 {
 	bitset<24> cells;
-	level * above, * below;
+	level* above, * below;
 
-	const coord center = { 3,3 };
+	const coord center = { 2,2 };
 
 	level() {
 		above = 0;
@@ -59,7 +59,7 @@ struct level
 			below = 0;
 		}
 	}
-	
+
 	void createUp() {
 		above = new level(this, true);
 	}
@@ -73,27 +73,33 @@ struct level
 			throw;
 		}
 		int i = pos.first * 5 + pos.second;
-		i -= i > 12;
+		if (i > 12) i--;
 		return cells[i];
 	}
 
+	//get neighbors from the lower level given the direction of the cell that is checking from the upper level
 	size_t getDownNeighbors(size_t dir) {
 		if (!below) {
 			return 0;
 		}
+
 		//the microoptimisation is big with this one!
 		int i,
-			j = (dir % 2) ? 0 : 4, // true: dir is down/right so we must check up/left
+			j = (dir % 2) ? 0 : 4, // true: dir is down/right so we must check up/left, false: vice-versa
 			* a, * b;
+
+		//I'm using pointers so I can easily flip diagonally
 		if (dir / 2) {	//true:dir is on horizontal axis
 			a = &i;
 			b = &j;
 		}
 		else {			//false: dir is on vertical axis
 			a = &j;
-			b = &j;
+			b = &i;
 		}
+
 		size_t neighbors = 0;
+		//now I can cover all cases with just one for! Nice!
 		for (i = 0; i < 5; i++)
 		{
 			neighbors += (*below)[{*a, * b}];
@@ -105,21 +111,21 @@ struct level
 		if (!above) {
 			for (int i = 0; i < 5; i++)
 			{
-				if ((*this)[{ 0,i }] || (*this)[{ 4,i }]) {
+				if ((*this)[{ 0, i }] || (*this)[{ 4, i }]) {
 					createUp();
 					goto done;
 				}
 			}
 			for (int j = 1; j < 4; j++)
 			{
-				if ((*this)[{ j,0 }] || (*this)[{ j,4 }]) {
+				if ((*this)[{ j, 0 }] || (*this)[{ j, 4 }]) {
 					createUp();
 					break;
 				}
 			}
 		}
 
-		done:
+	done:
 		level nextcells;
 
 		for (int i = 0; i < 5; i++)
@@ -192,7 +198,52 @@ struct level
 	}
 
 	auto count() {
-		return count(true) + below ? below->count(false) : 0;
+		return count(true) + (below ? below->count(false) : 0);
+	}
+
+	void print() {
+		/*for (size_t i = 0; i < 12; i++)
+		{
+			if (i % 5 == 0)
+				cout << endl;
+			cout << (cells[i] ? BUG : MTY);
+		}
+		cout << ' ';
+		for (size_t i = 12; i < 24; i++)
+		{
+			if (i % 5 == 4)
+				cout << endl;
+			cout << (cells[i] ? BUG : MTY);
+		}*/
+		for (size_t i = 0; i < 5; i++)
+		{
+			for (size_t j = 0; j < 5; j++)
+			{
+				coord pos = { i,j };
+				if (pos == center) {
+					cout << ' ';
+				}
+				else {
+					cout << (operator[](pos) ? BUG : MTY);
+				}
+			}
+			cout << endl;
+		}
+	}
+
+	void printall() {
+		int lvl = 0;
+		level* ptr = this;
+		while (ptr->below)
+		{
+			ptr = ptr->below;
+			lvl--;
+		}
+		for (; ptr ; ptr = ptr->above, lvl++ )
+		{
+			cout << "Depth " << lvl << ":\n";
+			ptr->print();
+		}
 	}
 };
 
@@ -207,14 +258,20 @@ int main() {
 		{
 			fin >> c;
 			if (c == BUG) {
-				area[{ i,j }] = true;
+				area[{ i, j }] = true;
 			}
 		}
 	}
-	
+	//area.printall();
+
 	for (size_t i = 0; i < 200; i++)
 	{
 		area.tick();
+		/*cout << "\nMin " << i + 1 << ":\n";
+		area.printall();
+		cout << area.count();
+		cin.get();*/
+
 	}
 	cout << area.count();
 }

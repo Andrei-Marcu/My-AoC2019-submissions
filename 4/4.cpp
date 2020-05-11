@@ -51,7 +51,7 @@ inline bool check2(int nr) {
 		lastdigit = nr % 10;
 		nr /= 10;
 	}
-		return doubled;
+	return doubled;
 }
 
 int main() {
@@ -63,4 +63,11 @@ int main() {
 		s += check1(i);
 	}
 	cout << s;
+
+	s = 0;
+	for (int i = x1 + 1; i < x2; i++)
+	{
+		s += check2(i);
+	}
+	cout << ' ' << s;
 }

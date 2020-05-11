@@ -25,12 +25,12 @@ number s[limit], i, base;
 pixel pos;
 map<pixel, bool> color;
 
-pixel direction[4] = {	
-						{-1, 0 },
-						{ 0, 1 },
-						{ 1, 0 },
-						{ 0, -1} 
-					 };
+pixel direction[4] = {
+	{-1, 0 },
+	{ 0, 1 },
+	{ 1, 0 },
+	{ 0, -1}
+};
 
 int dirptr;
 
@@ -179,10 +179,6 @@ void day2() {
 }
 
 int main() {
-	direction[0] = {-1,  0};
-	direction[1] = { 0,  1};
-	direction[2] = { 1,  0};
-	direction[3] = { 0, -1};
 
 	char dump;
 	for (i = 0; fin >> s[i]; i++) {
