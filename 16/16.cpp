@@ -9,11 +9,20 @@ using namespace std;
 
 typedef int number;
 
-number a[LIMIT], b[LIMIT], * s = a, * p = b;
+number a[LIMIT], b[LIMIT], c[LIMIT], * s = a, * p = b;
 char x;
 int n, offset;
 
 ifstream fin("input.txt");
+
+void output() {
+	for (size_t i = offset; i < offset + 8; i++)
+	{
+		number test = a[i];
+		cout << test;
+	}
+	cout << endl;
+}
 
 //inb4 browsing Reddit and realizing this could have been solved using partial sums. HOW I DID NOT THINK OF IT! This day is far from optimal
 
@@ -43,6 +52,7 @@ void part1() {
 		}
 		swap(s, p);
 	}
+	output();
 }
 
 void part2() {
@@ -98,6 +108,7 @@ void part2() {
 		}
 		swap(s, p);
 	}
+	output();
 }
 
 int main() {
@@ -106,12 +117,8 @@ int main() {
 		s[n] = x - '0';
 		n++;
 	} while (fin >> x);
-
-	//select part here:
+	memcpy(c, a, LIMIT);
+	part1();
+	memcpy(a, c, LIMIT);
 	part2();
-	for (size_t i = offset; i < offset + 8; i++)
-	{
-		number test = a[i];
-		cout << test;
-	}
 }

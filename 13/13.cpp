@@ -12,9 +12,9 @@ typedef long long number;
 
 ifstream fin("input.txt");
 
-number s[limit], i, base;
+number s[limit], p[limit], i, base;
 
-int game[YLMT][XLMT], state, x, y, block, score, pad, ball;
+int game[YLMT][XLMT], state, x, y, block, score, pad, ball, k;
 string chars = " X#_O";
 
 
@@ -183,9 +183,12 @@ int main() {
 	for (i = 0; fin >> s[i]; i++) {
 		fin.get(dump);
 	}
+	k = sizeof(int) * i;
 	i = 0;
-
+	memcpy(p, s, k);
 	part1();
-
+	memcpy(s, p, k);
+	i = base = state = 0;
+	part2();
 	return 0;
 }

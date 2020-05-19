@@ -9,7 +9,7 @@ using namespace std;
 
 ifstream fin("input.txt");
 
-int s[limit], p[limit], i;
+int s[limit], p[limit], i, input, x;
 
 int getval(int parameter) {
 	if (s[i] / 100 / (int)pow(10, parameter - 1) % 10) {
@@ -32,7 +32,8 @@ bool execute() {
 		break;
 	}
 	case 3: {
-		cin >> s[s[i + 1]];
+		//cin >> s[s[i + 1]];
+		s[s[i + 1]] = input;
 		i += 2;
 		break;
 	}
@@ -79,29 +80,10 @@ bool execute() {
 	return 1;
 }
 
-void part1() {
+void go(int in) {
+	input = in;
 	i = 0;
 	while (execute());
-}
-
-void part2() {
-	int x = sizeof(int) * i;
-	memcpy(p, s, x);
-	for (size_t j = 0; j < 100; j++)
-	{
-		for (size_t k = 0; k < 100; k++)
-		{
-			s[1] = j;
-			s[2] = k;
-			i = 0;
-			while (execute());
-			if (s[0] == 19690720) {
-				cout << (j * 100 + k);
-				return;
-			}
-			memcpy(s, p, x);
-		}
-	}
 }
 
 int main() {
@@ -109,5 +91,9 @@ int main() {
 	for (i = 0; fin >> s[i]; i++) {
 		fin.get(dump);
 	}
-	part1();
+	x = sizeof(int) * i;
+	memcpy(p, s, x);
+	go(1);
+	memcpy(s, p, x);
+	go(5);
 }

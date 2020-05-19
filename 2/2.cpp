@@ -20,15 +20,14 @@ bool execute() {
 	return 1;
 }
 
-void part1() {
+int part1() {
 	i = 0;
 	while (execute());
-	cout << s[0];
+	return s[0];
 }
 
-void part2() {
-	int x = sizeof(int) * i;
-	memcpy(p, s, x);
+int part2() {
+	//memcpy(p, s, x);
 	for (size_t j = 0; j < 100; j++)
 	{
 		for (size_t k = 0; k < 100; k++)
@@ -38,8 +37,8 @@ void part2() {
 			i = 0;
 			while (execute());
 			if (s[0] == 19690720) {
-				cout << (j * 100 + k);
-				return;
+				
+				return j * 100 + k;
 			}
 			memcpy(s, p, x);
 		}
@@ -51,5 +50,9 @@ int main() {
 	for (i = 0; fin >> s[i]; i++) {
 		fin.get(dump);
 	}
-	part1();
+	x = sizeof(int) * i;
+	memcpy(p, s, x);
+	cout << part1();
+	memcpy(s, p, x);
+	cout << " " << part2();
 }

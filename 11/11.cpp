@@ -20,7 +20,7 @@ void add(pixel& p1, pixel& p2) {
 	p1.second += p2.second;
 }
 
-number s[limit], i, base;
+number s[limit], p[limit], i, base, x;
 
 pixel pos;
 map<pixel, bool> color;
@@ -142,12 +142,12 @@ bool cycle() {
 	return 1;
 }
 
-void day1() {
+void part1() {
 	while (cycle());
-	cout << color.size();
+	cout << color.size() << endl;
 }
 
-void day2() {
+void part2() {
 	color[pos] = 1;
 	while (cycle());
 	int mini = INT_MAX, maxi = INT_MIN, minj = INT_MAX, maxj = INT_MIN;
@@ -184,9 +184,18 @@ int main() {
 	for (i = 0; fin >> s[i]; i++) {
 		fin.get(dump);
 	}
+	x = sizeof(int) * i;
 	i = 0;
+	memcpy(p, s, x);
+	part1();
 
-	day2();
+	color.clear();
+	base = 0;
+	i = 0;
+	dirptr = 0;
+	state = 0;
+	memcpy(s, p, x);
+	part2();
 
 	return 0;
 }

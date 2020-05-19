@@ -5,14 +5,6 @@
 #include <utility>
 #include <queue>
 
-
-
-
-
-
-//select part here
-#define part1 false
-
 #define limit 10000
 #define N 50
 
@@ -21,6 +13,7 @@ using namespace std;
 typedef long long number;
 typedef pair<number, number> packet;
 
+bool part1 = true;
 
 ifstream fin("input.txt");
 
@@ -179,13 +172,14 @@ struct Computer
 		}
 		return part1 || isWorking;
 	}
-}computers[50];
+}computers[N];
 
 int main() {
 	char dump;
 	for (size_t i = 0; fin >> mem[i]; i++) {
 		fin.get(dump);
 	}
+	//PART1
 	for (size_t i = 0; i < N; i++)
 	{
 		computers[i] = Computer(i, mem);
@@ -195,31 +189,41 @@ int main() {
 		bool idle = 1;
 		for (size_t i = 0; i < N; i++)
 		{
-			if (part1) {
-				if (!computers[i].cycle()) {
-					goto exit;
-				}
-			}
-			else
-			{
-				if (computers[i].cycle())
-				{
-					idle = 0;
-				}
+			if (!computers[i].cycle()) {
+				goto exit;
 			}
 		}
-		if (!part1 && idle)
+	}
+exit:
+	cout << ' ';
+	//PART2
+	for (size_t i = 0; i < N; i++)
+	{
+		computers[i] = Computer(i, mem);
+	}
+	part1 = false;
+
+	while (true)
+	{
+		bool idle = 1;
+		for (size_t i = 0; i < N; i++)
+		{
+			if (computers[i].cycle())
+			{
+				idle = 0;
+			}
+		}
+		if (idle)
 		{
 			if (lastY == NAT.second)
 			{
 				cout << lastY;
-				goto exit;
+				return 0;
 			}
 			lastY = NAT.second;
 			computers[0].buffer.push(NAT);
 			computers[0].isWorking = 1;
 		}
 	}
-exit:
 	return 0;
 }

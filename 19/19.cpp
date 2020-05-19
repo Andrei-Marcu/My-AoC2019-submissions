@@ -131,28 +131,20 @@ int main() {
 		}
 		//cout << '\n';
 	}
-	cout << sum << endl << "It would have taken me longer to make an automatic way to search, so instead I've made a manual search\n"
-		<< "You are always shown the position you are in, you need to input 2 values that are going to be added to the position\n"
-		<< "Negatives are allowed and 0 0 prints the found answer, correct or not, good luck\n";
-	int x = 0, y = 0, kx, ky;
-	do
+	int x = 99, y = 0;
+	while (!check(x,y))
 	{
-		for (size_t i = max(0, y - EDGE); i < y + SQR + EDGE; i++)
-		{
-			for (size_t j = max(0, x - EDGE); j < x + SQR + EDGE; j++)
-			{
-				if (i >= y && i < y + SQR && j >= x && j < x + SQR)
-					cout << (check(j, i) ? 'O' : '.');
-				else
-					cout << (check(j, i) ? '#' : ' ');
-			}
-			cout << '\n';
+		y++;
+	}
+	while (!check(x-99,y+99))
+	{
+		if (check(x + 1, y)) {
+			x++;
 		}
-		cout << x << ' ' << y << endl;
-		cin >> kx >> ky;
-		x += kx;
-		y += ky;
-		system("CLS");
-	} while (kx || ky);
-	cout << sum << ' ' << x * 10000 + y;
+		else
+		{
+			y++;
+		}
+	}
+	cout << sum << ' ' << (x-99) * 10000 + y;
 }

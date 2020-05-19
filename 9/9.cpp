@@ -11,7 +11,7 @@ typedef long long number;
 
 ifstream fin("input.txt");
 
-number s[limit], i, base;
+number s[limit], p[limit], i, base, x, input;
 
 //first parameter(excluding the opcode) is 1
 number& getval(int parameter) {
@@ -42,7 +42,8 @@ bool cycle() {
 		break;
 	}
 	case 3: {
-		cin >> getval(1);
+		//cin >> getval(1);
+		getval(1) = input;
 		i += 2;
 		break;
 	}
@@ -94,11 +95,21 @@ bool cycle() {
 	return 1;
 }
 
+void go(number in) {
+	input = in;
+	i = 0;
+	base = 0;
+	while (cycle());
+}
+
 int main() {
 	char dump;
 	for (i = 0; fin >> s[i]; i++) {
 		fin.get(dump);
 	}
-	i = 0;
-	while (cycle());
+	x = i * sizeof(number);
+	memcpy(p, s, x);
+	go(1);
+	memcpy(s, p, x);
+	go(2);
 }

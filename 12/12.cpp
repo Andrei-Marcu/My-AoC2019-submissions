@@ -59,7 +59,7 @@ bool isBack(int i) {
 	return true;
 }
 
-big day1() {
+big part1() {
 	for (size_t i = 0; i < 3; i++)
 	{
 		auto& axis = moons[i];
@@ -88,7 +88,7 @@ big day1() {
 	return sol;
 }
 
-big day2() {
+big part2() {
 	unsigned long long result = 1;
 
 	for (size_t i = 0; i < 3; i++)
@@ -120,7 +120,6 @@ big day2() {
 		}
 		result *= k / b;
 	}
-
 	return result;
 }
 
@@ -139,5 +138,14 @@ int main() {
 			init[i][j] = moons[i][j].pos;
 		}
 	}
-	cout << day1();
+	cout << part1();
+	for (size_t i = 0; i < 3; i++)
+	{
+		for (size_t j = 0; j < N; j++)
+		{
+			moons[i][j].pos = init[i][j];
+			moons[i][j].vel = 0;
+		}
+	}
+	cout << ' ' << part2();
 }
