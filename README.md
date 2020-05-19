@@ -1,7 +1,9 @@
 # AoC2019-submissions
 My submissions for Advent of Code 2019
 
-Some days might require fiddling with the definitions(especially those with limit or LMT in them) in order to accommodate larger inputs
+Some days might require fiddling with the definitions(especially those with limit or LMT in them) in order to accommodate larger inputs.
+
+Because I respect the author of the event, I've gitignored the input files, since he preffers them not to be published.
 
 #### Days using STL containers(beyond strings, pairs and vectors)
 6 10 11 14 15 17 24/1
